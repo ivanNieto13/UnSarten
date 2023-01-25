@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">UnSarten</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Inicia sesion o Registrate</string>
+    <string name="action_sign_in_short">Enviar</string>
+    <string name="action_next">Siguiente</string>
+    <string name="action_confirm_code">Ingresa el código de 4 dígitos que se te envió a +52 %1$s</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_code_number">Ingresa un código válido</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="phone_number">Número de telefono</string>
+    <string name="login_dialog_title">Confirma tu número</string>
+    <string name="login_dialog_body">Tu número es +52</string>
+    <string name="login_dialog_positive">Confirmar</string>
+    <string name="login_dialog_negative">Editar</string>
+    <string name="action_code_example">Código de 4 dígitos</string>
+    <string name="register_user_name">Nombre(s)</string>
+    <string name="register_user_last_name">Apellidos</string>
+    <string name="register_user_email">E-mail</string>
+    <string name="resend_code">Reenviar código</string>
+    <string name="edit_phone_number">Cambiar teléfono</string>
+    <string name="title_register_user">Ingresa tus datos</string>
+    <string name="title_activity_home">Home</string>
+    <string name="invalid_email">Correo inválido</string>
+
+</resources>

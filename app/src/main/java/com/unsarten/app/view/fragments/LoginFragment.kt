@@ -2,16 +2,26 @@ package com.unsarten.app.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unsarten.app.R
+import com.unsarten.app.databinding.ActivityLoginBinding
 import com.unsarten.app.databinding.LoginFragmentBinding
+import com.unsarten.app.dto.VerifyNumberInput
+import com.unsarten.app.helpers.RetrofitHelper
+import com.unsarten.app.model.VerifyNumber
+import com.unsarten.app.service.lib.LoginAPI
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import java.io.Serializable
 
 class LoginFragment : Fragment() {
     private var _binding: LoginFragmentBinding? = null
@@ -40,17 +50,19 @@ class LoginFragment : Fragment() {
                     .setTitle(R.string.login_dialog_title)
                     .setMessage("${getString(R.string.login_dialog_body)} $phoneNumber?")
                     .setPositiveButton(R.string.login_dialog_positive) { dialog, which ->
-                        confirmCodeFragment = ConfirmCodeFragment()
-                        activity?.supportFragmentManager?.beginTransaction()
-                            ?.replace(this.id, confirmCodeFragment)
-                            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            ?.addToBackStack(null)
-                            ?.apply {
-                                confirmCodeFragment.arguments = Bundle().apply {
-                                    putString("phoneNumber", phoneNumber)
-                                }
+                        val loginApi = RetrofitHelper.getInstance().create(LoginAPI::class.java)
+                        MainScope().launch {
+                            val input = VerifyNumberInput("+52" + phoneNumber!!)
+                            val result = loginApi.verifyNumber(input)
+                            Log.d("result: ", result.body().toString())
+                            if (result.isSuccessful) {
+                                val verifyNumber = result.body() as VerifyNumber
+                                beginTransaction(verifyNumber)
+                            } else {
+                                Log.d("result: ", "error")
                             }
-                            ?.commit()
+                        }
+
                     }
                     .setNegativeButton(R.string.login_dialog_negative) { dialog, which ->
                         println("Editar")
@@ -58,6 +70,15 @@ class LoginFragment : Fragment() {
                     .show()
             }
         }
+    }
+
+    private fun beginTransaction(verifyNumber: VerifyNumber) {
+        val serial = verifyNumber as Serializable
+        val navController = NavHostFragment.findNavController(this)
+        val bundle = Bundle()
+        bundle.putSerializable("verifyNumber", serial)
+        bundle.putString("phoneNumber", verifyNumber.data.VerifyNumber.phoneNumber)
+        navController.navigate(R.id.action_loginFragment2_to_confirmCodeFragment2, bundle)
     }
 
     override fun onResume() {

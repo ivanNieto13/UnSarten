@@ -9,7 +9,7 @@
         android:id="@+id/loginFragment"
         android:name="com.unsarten.app.view.fragments.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/login_fragment"
+        tools:layout="@layout/fragment_login"
         >
         <action
             android:id="@+id/action_loginFragment_to_confirmCodeFragment"

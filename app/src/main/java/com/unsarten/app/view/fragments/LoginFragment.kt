@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unsarten.app.R
-import com.unsarten.app.databinding.LoginFragmentBinding
+import com.unsarten.app.databinding.FragmentLoginBinding
 import com.unsarten.app.dto.VerifyNumberInput
 import com.unsarten.app.helpers.RetrofitHelper
 import com.unsarten.app.model.VerifyNumber
@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import java.io.Serializable
 
 class LoginFragment : Fragment() {
-    private var _binding: LoginFragmentBinding? = null
+    private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var confirmCodeFragment: ConfirmCodeFragment
@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = LoginFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         validateInput()

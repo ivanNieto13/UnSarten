@@ -91,7 +91,7 @@ class ConfirmCodeFragment : Fragment() {
         val bundle = Bundle()
         bundle.putSerializable("verifyNumber", verifyNumberSerial)
         bundle.putSerializable("verifyCode", verifyCodeSerial)
-        navController.navigate(R.id.action_confirmCodeFragment2_to_registerUserFragment2, bundle)
+        navController.navigate(R.id.action_confirmCodeFragment_to_registerUserFragment, bundle)
     }
 
     private fun onBackPressed() {

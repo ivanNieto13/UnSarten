@@ -3,30 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment2">
+    app:startDestination="@id/loginFragment">
 
     <fragment
-        android:id="@+id/loginFragment2"
+        android:id="@+id/loginFragment"
         android:name="com.unsarten.app.view.fragments.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/login_fragment"
         >
         <action
-            android:id="@+id/action_loginFragment2_to_confirmCodeFragment2"
-            app:destination="@id/confirmCodeFragment2" />
+            android:id="@+id/action_loginFragment_to_confirmCodeFragment"
+            app:destination="@id/confirmCodeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/confirmCodeFragment2"
+        android:id="@+id/confirmCodeFragment"
         android:name="com.unsarten.app.view.fragments.ConfirmCodeFragment"
         android:label="ConfirmCodeFragment"
         tools:layout="@layout/fragment_confirm_code"
         >
         <action
-            android:id="@+id/action_confirmCodeFragment2_to_registerUserFragment2"
-            app:destination="@id/registerUserFragment2" />
+            android:id="@+id/action_confirmCodeFragment_to_registerUserFragment"
+            app:destination="@id/registerUserFragment" />
     </fragment>
     <fragment
-        android:id="@+id/registerUserFragment2"
+        android:id="@+id/registerUserFragment"
         android:name="com.unsarten.app.view.fragments.RegisterUserFragment"
         android:label="RegisterUserFragment"
         tools:layout="@layout/fragment_register_user"

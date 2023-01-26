@@ -12,13 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unsarten.app.R
-import com.unsarten.app.databinding.ActivityLoginBinding
 import com.unsarten.app.databinding.LoginFragmentBinding
 import com.unsarten.app.dto.VerifyNumberInput
 import com.unsarten.app.helpers.RetrofitHelper
 import com.unsarten.app.model.VerifyNumber
 import com.unsarten.app.service.lib.LoginAPI
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.io.Serializable
@@ -78,7 +76,7 @@ class LoginFragment : Fragment() {
         val bundle = Bundle()
         bundle.putSerializable("verifyNumber", serial)
         bundle.putString("phoneNumber", verifyNumber.data.VerifyNumber.phoneNumber)
-        navController.navigate(R.id.action_loginFragment2_to_confirmCodeFragment2, bundle)
+        navController.navigate(R.id.action_loginFragment_to_confirmCodeFragment, bundle)
     }
 
     override fun onResume() {

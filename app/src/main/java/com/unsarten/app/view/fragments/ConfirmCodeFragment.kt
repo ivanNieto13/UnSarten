@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unsarten.app.R
 import com.unsarten.app.databinding.FragmentConfirmCodeBinding
 import com.unsarten.app.dto.VerifyCodeInput
@@ -51,6 +52,15 @@ class ConfirmCodeFragment : Fragment() {
             codeNumber = binding.etCodeNumber.editText?.text.toString()
             if (codeNumber?.length!! < 4) {
                 binding.etCodeNumber.editText?.error = getString(R.string.invalid_code_number)
+                activity?.let {
+                    MaterialAlertDialogBuilder(it)
+                        .setTitle(R.string.login_dialog_code_title_error)
+                        .setMessage(R.string.invalid_code_number)
+                        .setPositiveButton(R.string.login_dialog_positive_accept) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
+                }
             } else {
                 if (verifyNumber?.data?.VerifyNumber?.isVerified!!) {
                     println("Send to home" + verifyNumber?.data?.VerifyNumber)

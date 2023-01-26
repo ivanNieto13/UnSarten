@@ -43,29 +43,46 @@ class LoginFragment : Fragment() {
     private fun validateInput() {
         binding.btnLogin.setOnClickListener {
             phoneNumber = binding.etPhoneNumber.editText?.text.toString()
-            activity?.let {
-                MaterialAlertDialogBuilder(it)
-                    .setTitle(R.string.login_dialog_title)
-                    .setMessage("${getString(R.string.login_dialog_body)} $phoneNumber?")
-                    .setPositiveButton(R.string.login_dialog_positive) { dialog, which ->
-                        val loginApi = RetrofitHelper.getInstance().create(LoginAPI::class.java)
-                        MainScope().launch {
-                            val input = VerifyNumberInput("+52" + phoneNumber!!)
-                            val result = loginApi.verifyNumber(input)
-                            Log.d("result: ", result.body().toString())
-                            if (result.isSuccessful) {
-                                val verifyNumber = result.body() as VerifyNumber
-                                beginTransaction(verifyNumber)
-                            } else {
-                                Log.d("result: ", "error")
+            if (phoneNumber?.length == 0) {
+                activity?.let {
+                    MaterialAlertDialogBuilder(it)
+                        .setTitle(R.string.login_dialog_title_error)
+                        .setMessage(R.string.login_dialog_body_error)
+                        .setPositiveButton(R.string.login_dialog_positive_accept) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
+                }
+            }
+            if (phoneNumber?.length in 1..9) {
+                binding.etPhoneNumber.editText?.error = getString(com.unsarten.app.R.string.login_dialog_title_error)
+            }
+            if (phoneNumber?.length == 10) {
+                activity?.let {
+                    MaterialAlertDialogBuilder(it)
+                        .setTitle(R.string.login_dialog_title)
+                        .setMessage("${getString(R.string.login_dialog_body)} $phoneNumber?")
+                        .setPositiveButton(R.string.login_dialog_positive) { dialog, which ->
+                            val loginApi = RetrofitHelper.getInstance().create(LoginAPI::class.java)
+                            MainScope().launch {
+                                val input = VerifyNumberInput("+52" + phoneNumber!!)
+                                val result = loginApi.verifyNumber(input)
+                                Log.d("result: ", result.body().toString())
+                                if (result.isSuccessful) {
+                                    val verifyNumber = result.body() as VerifyNumber
+                                    beginTransaction(verifyNumber)
+                                } else {
+                                    Log.d("result: ", "error")
+                                }
                             }
+
+                        }
+                        .setNegativeButton(R.string.login_dialog_negative) { dialog, _ ->
+                            dialog.dismiss()
                         }
 
-                    }
-                    .setNegativeButton(R.string.login_dialog_negative) { dialog, which ->
-                        println("Editar")
-                    }
-                    .show()
+                        .show()
+                }
             }
         }
     }

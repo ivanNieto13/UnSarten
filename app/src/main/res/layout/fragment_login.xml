@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:text="@string/action_sign_in"
         android:textColor="@color/icon"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:hint="@string/phone_number"
         app:boxCornerRadiusBottomEnd="10dp"
@@ -42,8 +42,11 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cornerRadius="10dp"
+        android:insetBottom="0dp"
+        android:insetTop="0dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/positive_button"
         android:text="@string/action_sign_in_short"

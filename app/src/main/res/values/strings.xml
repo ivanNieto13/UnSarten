@@ -6,7 +6,7 @@
     <string name="action_sign_in">Inicia sesion o Registrate</string>
     <string name="action_sign_in_short">Enviar</string>
     <string name="action_next">Siguiente</string>
-    <string name="action_confirm_code">Ingresa el código de 4 dígitos que se te envió a +52 %1$s</string>
+    <string name="action_confirm_code">Ingresa el código de 4 dígitos que se te envió a %1$s</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_code_number">Ingresa un código válido</string>
     <string name="invalid_username">Not a valid username</string>
@@ -15,6 +15,7 @@
     <string name="phone_number">Número de telefono</string>
     <string name="login_dialog_title">Confirma tu número</string>
     <string name="login_dialog_body">Tu número es +52</string>
+    <string name="login_dialog_positive_accept">Aceptar</string>
     <string name="login_dialog_positive">Confirmar</string>
     <string name="login_dialog_negative">Editar</string>
     <string name="action_code_example">Código de 4 dígitos</string>
@@ -26,5 +27,8 @@
     <string name="title_register_user">Ingresa tus datos</string>
     <string name="title_activity_home">Home</string>
     <string name="invalid_email">Correo inválido</string>
+    <string name="login_dialog_body_error">Ingresa un número a 10 dígitos</string>
+    <string name="login_dialog_title_error">Número no válido</string>
+    <string name="login_dialog_code_title_error">Código inválido</string>
 
 </resources>

@@ -6,7 +6,15 @@
     <string name="action_sign_in">Inicia sesion o Registrate</string>
     <string name="action_sign_in_short">Enviar</string>
     <string name="action_next">Siguiente</string>
+    <string name="action_create_order_btn">Crear orden</string>
+    <string name="action_back_home_btn">Regresar</string>
     <string name="action_confirm_code">Ingresa el código de 4 dígitos que se te envió a %1$s</string>
+    <string name="action_create_order">Solicitar un platillo</string>
+    <string name="action_name_order">Nombre del platillo</string>
+    <string name="action_budget_order">Presupuesto</string>
+    <string name="action_persons_order">Platillo por persona</string>
+    <string name="action_ingredients_order">Posibles ingredientes</string>
+    <string name="action_add_pictures_order">Agrega una foto de referencia</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_code_number">Ingresa un código válido</string>
     <string name="invalid_username">Not a valid username</string>

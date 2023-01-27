@@ -24,12 +24,24 @@
         <action
             android:id="@+id/action_confirmCodeFragment_to_registerUserFragment"
             app:destination="@id/registerUserFragment" />
+        <action
+            android:id="@+id/action_confirmCodeFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
     <fragment
         android:id="@+id/registerUserFragment"
         android:name="com.unsarten.app.view.fragments.RegisterUserFragment"
         android:label="RegisterUserFragment"
         tools:layout="@layout/fragment_register_user"
-        />
+        >
+        <action
+            android:id="@+id/action_registerUserFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="com.unsarten.app.activties.HomeActivity"
+        android:label="activity_home"
+        tools:layout="@layout/activity_home" />
 
 </navigation>

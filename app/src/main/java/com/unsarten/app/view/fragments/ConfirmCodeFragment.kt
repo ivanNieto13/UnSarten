@@ -1,15 +1,16 @@
 package com.unsarten.app.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unsarten.app.R
+import com.unsarten.app.activties.HomeActivity
 import com.unsarten.app.databinding.FragmentConfirmCodeBinding
 import com.unsarten.app.dto.VerifyCodeInput
 import com.unsarten.app.helpers.RetrofitHelper
@@ -17,7 +18,6 @@ import com.unsarten.app.model.VerifyCode
 import com.unsarten.app.model.VerifyNumber
 import com.unsarten.app.service.lib.LoginAPI
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.io.Serializable
@@ -35,7 +35,6 @@ class ConfirmCodeFragment : Fragment() {
 
     private lateinit var registerUserFragment: RegisterUserFragment
 
-    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,7 +62,7 @@ class ConfirmCodeFragment : Fragment() {
                 }
             } else {
                 if (verifyNumber?.data?.VerifyNumber?.isVerified!!) {
-                    println("Send to home" + verifyNumber?.data?.VerifyNumber)
+                    beginTransactionToHome()
                 } else {
                     val loginApi = RetrofitHelper.getInstance().create(LoginAPI::class.java)
                     MainScope().launch {
@@ -73,12 +72,14 @@ class ConfirmCodeFragment : Fragment() {
                         if (result.isSuccessful) {
                             val verifyCode = result.body() as VerifyCode
                             if (verifyCode.data.VerifyCode.isValid) {
-                                beginTransaction(verifyCode)
+                                beginTransactionToRegisterUserFragment(verifyCode)
                             } else {
-                                binding.etCodeNumber.editText?.error = getString(R.string.invalid_code_number)
+                                binding.etCodeNumber.editText?.error =
+                                    getString(R.string.invalid_code_number)
                             }
                         } else {
-                            binding.etCodeNumber.editText?.error = getString(R.string.invalid_code_number)
+                            binding.etCodeNumber.editText?.error =
+                                getString(R.string.invalid_code_number)
                             Log.d("result: ", "error")
                         }
                     }
@@ -93,7 +94,7 @@ class ConfirmCodeFragment : Fragment() {
         return root
     }
 
-    private fun beginTransaction(verifyCode: VerifyCode) {
+    private fun beginTransactionToRegisterUserFragment(verifyCode: VerifyCode) {
         registerUserFragment = RegisterUserFragment()
         val verifyCodeSerial = verifyCode as Serializable
         val verifyNumberSerial = verifyNumber as Serializable
@@ -102,6 +103,12 @@ class ConfirmCodeFragment : Fragment() {
         bundle.putSerializable("verifyNumber", verifyNumberSerial)
         bundle.putSerializable("verifyCode", verifyCodeSerial)
         navController.navigate(R.id.action_confirmCodeFragment_to_registerUserFragment, bundle)
+    }
+
+    private fun beginTransactionToHome() {
+        val intent = Intent(activity, HomeActivity::class.java)
+        activity?.startActivity(intent)
+        activity?.finish()
     }
 
     private fun onBackPressed() {

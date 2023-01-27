@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/chat_list"
+        android:icon="@drawable/ic_baseline_chat"
+        android:title="@string/navigation_bar_messages" />
+    <item
+        android:id="@+id/order_list"
+        android:icon="@drawable/ic_baseline_search"
+        android:title="@string/navigation_bar_orders"  />
+    <item
+        android:id="@+id/new_order"
+        android:icon="@drawable/ic_baseline_add_order"
+        android:title="@string/navigation_bar_new_order" />
+    <item
+        android:id="@+id/profile_user"
+        android:icon="@drawable/ic_baseline_person"
+        android:title="@string/navigation_bar_profile" />
+</menu>

@@ -30,5 +30,9 @@
     <string name="login_dialog_body_error">Ingresa un número a 10 dígitos</string>
     <string name="login_dialog_title_error">Número no válido</string>
     <string name="login_dialog_code_title_error">Código inválido</string>
+    <string name="navigation_bar_messages">Chats</string>
+    <string name="navigation_bar_orders">Órdenes</string>
+    <string name="navigation_bar_new_order">Nueva órden</string>
+    <string name="navigation_bar_profile">Perfil</string>
 
 </resources>

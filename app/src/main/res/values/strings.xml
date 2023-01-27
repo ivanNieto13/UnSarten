@@ -15,7 +15,7 @@
     <string name="action_persons_order">Platillo por persona</string>
     <string name="action_ingredients_order">Posibles ingredientes</string>
     <string name="action_add_pictures_order">Agrega una foto de referencia</string>
-    <string name="welcome">"Welcome!"</string>
+    <string name="description_profile_image">Imagen de usuario</string>
     <string name="invalid_code_number">Ingresa un código válido</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
@@ -42,5 +42,7 @@
     <string name="navigation_bar_orders">Órdenes</string>
     <string name="navigation_bar_new_order">Nueva órden</string>
     <string name="navigation_bar_profile">Perfil</string>
+    <string name="chats_title">Mensajes</string>
+    <string name="chat_preview_text">Hola!</string>
 
 </resources>

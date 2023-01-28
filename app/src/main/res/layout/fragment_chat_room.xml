@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragments.ChatRoomFragment">
+
+    <TextView
+        android:id="@+id/tvChatRoomTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chat_room_title"
+        android:textColor="@color/icon"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llChatRoomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvChatRoomTitle">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/phone_button_shape"
+            android:src="@drawable/ic_baseline_person"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="@string/register_user_name"
+            android:textColor="@color/icon"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/phone_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/phone_button_shape"
+            android:contentDescription="@string/chat_room_title"
+            android:src="@drawable/ic_baseline_phone" />
+
+    </LinearLayout>
+
+    <!--    TODO ADD RECYCLER VIEW HERE -->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <LinearLayout
+        android:id="@+id/llChatRoomBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline">
+
+        <EditText
+            android:id="@+id/message_input"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:background="@color/main"
+            android:hint="@string/chat_room_input"
+            android:inputType="textMultiLine" />
+
+        <ImageButton
+            android:id="@+id/add_picture_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/phone_button_shape"
+            android:contentDescription="@string/chat_room_attachment"
+            android:src="@drawable/ic_baseline_attachment" />
+
+        <ImageButton
+            android:id="@+id/send_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/primary"
+            android:contentDescription="@string/chat_room_call_user"
+            android:src="@drawable/ic_baseline_send" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

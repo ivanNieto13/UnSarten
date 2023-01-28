@@ -13,4 +13,5 @@
     <color name="icon">#66062B</color>
     <color name="positive_button">#DB2626</color>
     <color name="main">#FDE0D2</color>
+    <color name="background">#FBBAA6</color>
 </resources>

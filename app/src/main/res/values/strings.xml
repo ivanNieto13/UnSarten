@@ -44,5 +44,9 @@
     <string name="navigation_bar_profile">Perfil</string>
     <string name="chats_title">Mensajes</string>
     <string name="chat_preview_text">Hola!</string>
+    <string name="chat_room_title">Mensajes de la orden</string>
+    <string name="chat_room_input">Escribir mensaje</string>
+    <string name="chat_room_attachment">Adjuntar imagen</string>
+    <string name="chat_room_call_user">Enviar</string>
 
 </resources>

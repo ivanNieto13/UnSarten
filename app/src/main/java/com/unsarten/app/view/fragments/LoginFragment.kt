@@ -9,13 +9,17 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.room.Room
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unsarten.app.R
 import com.unsarten.app.databinding.FragmentLoginBinding
 import com.unsarten.app.dto.VerifyNumberInput
 import com.unsarten.app.helpers.RetrofitHelper
 import com.unsarten.app.model.VerifyNumber
+import com.unsarten.app.room.dao.DBUserData
+import com.unsarten.app.room.dao.UserData
 import com.unsarten.app.service.lib.LoginAPI
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -25,7 +29,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var confirmCodeFragment: ConfirmCodeFragment
+    private lateinit var room: DBUserData
     private var phoneNumber: String? = null
 
     override fun onCreateView(
@@ -34,6 +38,21 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        activity?.let {
+            room = Room.databaseBuilder(it, DBUserData::class.java, "db_user_data").build()
+        }
+        lifecycleScope.launch {
+            val users = room.daoUser().getUserData()
+            if (users.isNotEmpty()) {
+                val bundle = Bundle()
+                val user = users[0] as Serializable
+                bundle.putSerializable("user", user)
+                NavHostFragment.findNavController(this@LoginFragment)
+                    .navigate(R.id.action_loginFragment_to_homeActivity, bundle)
+            }
+        }
+
 
         validateInput()
 
@@ -93,6 +112,18 @@ class LoginFragment : Fragment() {
         val bundle = Bundle()
         bundle.putSerializable("verifyNumber", serial)
         bundle.putString("phoneNumber", verifyNumber.data.VerifyNumber.phoneNumber)
+        if (verifyNumber.data.VerifyNumber.userId != null && verifyNumber.data.VerifyNumber.userId != "") {
+            val user = UserData(
+                verifyNumber.data.VerifyNumber.userId,
+                verifyNumber.data.VerifyNumber.email ?: "",
+                verifyNumber.data.VerifyNumber.firstName ?: "",
+                verifyNumber.data.VerifyNumber.lastName ?: "",
+                verifyNumber.data.VerifyNumber.phoneNumber,
+            )
+            lifecycleScope.launch {
+                room.daoUser().addUser(user)
+            }
+        }
         navController.navigate(R.id.action_loginFragment_to_confirmCodeFragment, bundle)
     }
 
@@ -115,7 +146,10 @@ class LoginFragment : Fragment() {
                 editText?.setSelection(10)
                 val imm = it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+                imm.toggleSoftInput(
+                    InputMethodManager.SHOW_FORCED,
+                    InputMethodManager.HIDE_IMPLICIT_ONLY
+                )
             }
         }
     }

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.unsarten.app.R
 import com.unsarten.app.databinding.ActivityHomeBinding
+import com.unsarten.app.room.dao.UserData
 import com.unsarten.app.view.fragments.*
 
 class HomeActivity : AppCompatActivity() {
@@ -19,6 +20,10 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val myIntent = intent
+        val user = myIntent.getSerializableExtra("user") as UserData
+
         loadFragment(OrderListFragment())
         bottomNav = findViewById(binding.bottomNav.id)
         bottomNav.menu.findItem(itemByDefault).isChecked = true
@@ -37,7 +42,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.profile_user -> {
-                    loadFragment(ProfileFragment())
+                    loadFragment(ProfileFragment(user))
                     true
                 }
                 else -> {

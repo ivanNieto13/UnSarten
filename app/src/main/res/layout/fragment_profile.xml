@@ -39,7 +39,17 @@
         android:gravity="center"
         android:text="@string/profile_user_name"
         android:textColor="@color/icon"
-        android:textSize="20sp" />
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/profile_user_email"
+        android:textColor="@color/icon"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/logout_button"

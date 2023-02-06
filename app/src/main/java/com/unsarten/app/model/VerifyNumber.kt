@@ -14,5 +14,8 @@ data class VerifyNumberData (
 data class VerifyNumberClass (
     val phoneNumber: String,
     val isVerified: Boolean,
-    val userId: String?
+    val userId: String?,
+    val email: String?,
+    val firstName: String?,
+    val lastName: String?,
 ): Serializable

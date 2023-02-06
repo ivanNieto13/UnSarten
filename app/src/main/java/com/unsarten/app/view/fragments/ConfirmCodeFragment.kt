@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.room.Room
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unsarten.app.R
 import com.unsarten.app.activties.HomeActivity
@@ -16,6 +18,7 @@ import com.unsarten.app.dto.VerifyCodeInput
 import com.unsarten.app.helpers.RetrofitHelper
 import com.unsarten.app.model.VerifyCode
 import com.unsarten.app.model.VerifyNumber
+import com.unsarten.app.room.dao.DBUserData
 import com.unsarten.app.service.lib.LoginAPI
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.MainScope
@@ -31,6 +34,7 @@ class ConfirmCodeFragment : Fragment() {
     private var phoneNumber: String? = null
     private var verifyNumber: VerifyNumber? = null
 
+    private lateinit var room: DBUserData
     private var showInputError = false
 
     private lateinit var registerUserFragment: RegisterUserFragment
@@ -41,6 +45,10 @@ class ConfirmCodeFragment : Fragment() {
     ): View {
         _binding = FragmentConfirmCodeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        activity?.let {
+            room = Room.databaseBuilder(it, DBUserData::class.java, "db_user_data").build()
+        }
 
         phoneNumber = arguments?.getString("phoneNumber")
         verifyNumber = arguments?.getSerializable("verifyNumber") as VerifyNumber?
@@ -106,9 +114,16 @@ class ConfirmCodeFragment : Fragment() {
     }
 
     private fun beginTransactionToHome() {
-        val intent = Intent(activity, HomeActivity::class.java)
-        activity?.startActivity(intent)
-        activity?.finish()
+        lifecycleScope.launch {
+            val intent = Intent(activity, HomeActivity::class.java)
+            val users = room.daoUser().getUserData()
+            if (users.isNotEmpty()) {
+                val user = users[0] as Serializable
+                intent.putExtra("user", user)
+            }
+            activity?.startActivity(intent)
+            activity?.finish()
+        }
     }
 
     private fun onBackPressed() {

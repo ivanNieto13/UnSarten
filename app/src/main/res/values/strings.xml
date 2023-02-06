@@ -56,8 +56,8 @@
     <string name="chat_room_call_user">Enviar</string>
     <string name="orders_item_list_name">Enchiladas verdes</string>
     <string name="orders_item_list_budget">$250</string>
-    <string name="orders_item_list_user">John Doe</string>
-    <string name="orders_list">Ordenes en curso</string>
+    <string name="orders_item_list_persons">%1$s personas</string>
+    <string name="orders_list">Ver ordenes</string>
     <string name="profile_logout_button">Cerrar sesión</string>
     <string name="profile_user_name">John Doe</string>
     <string name="profile_user_email">john@doe.com</string>

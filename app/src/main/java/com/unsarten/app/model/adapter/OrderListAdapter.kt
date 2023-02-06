@@ -22,13 +22,13 @@ class OrderListAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var orderName: TextView
         var orderBudget: TextView
-        var orderAuthor: TextView
+        var orderPersons: TextView
         var parentLayout: LinearLayout
 
         init {
             orderName = view.findViewById(R.id.tvOrder_name)
             orderBudget = view.findViewById(R.id.tvOrder_budget)
-            orderAuthor = view.findViewById(R.id.tvOrder_author)
+            orderPersons = view.findViewById(R.id.tvOrder_persons)
             parentLayout = view.findViewById(R.id.llOrderItem)
         }
 
@@ -43,8 +43,8 @@ class OrderListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val info = data[position]
         holder.orderName.text = info.orderName
-        holder.orderBudget.text = info.budget.toString()
-        holder.orderAuthor.text = info.orderStatus
+        holder.orderBudget.text = "$ ${info.budget}"
+        holder.orderPersons.text = "${info.persons} personas"
         holder.parentLayout.setOnClickListener {
             mOnClickListener.onClick(it)
         }

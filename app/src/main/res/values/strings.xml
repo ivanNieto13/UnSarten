@@ -38,9 +38,15 @@
     <string name="login_dialog_body_error">Ingresa un número a 10 dígitos</string>
     <string name="login_dialog_title_error">Número no válido</string>
     <string name="login_dialog_code_title_error">Código inválido</string>
+    <string name="create_order_dialog_empty_name_body_error">Ingresa un nombre de la orden</string>
+    <string name="create_order_dialog_empty_name_title_error">Nombre inválido</string>
+    <string name="create_order_dialog_empty_budget_title_error">Presupuesto inválido</string>
+    <string name="create_order_dialog_empty_budget_body_error">Ingresa un presupuesto mayor a $0</string>
+    <string name="create_order_dialog_empty_persons_title_error">Cantidad de personas no válido</string>
+    <string name="create_order_dialog_empty_persons_body_error">Ingresa un número mayor a 0</string>
     <string name="navigation_bar_messages">Chats</string>
-    <string name="navigation_bar_orders">Órdenes</string>
-    <string name="navigation_bar_new_order">Nueva órden</string>
+    <string name="navigation_bar_orders">Ordenes</string>
+    <string name="navigation_bar_new_order">Nueva orden</string>
     <string name="navigation_bar_profile">Perfil</string>
     <string name="chats_title">Mensajes</string>
     <string name="chat_preview_text">Hola!</string>
@@ -48,5 +54,12 @@
     <string name="chat_room_input">Escribir mensaje</string>
     <string name="chat_room_attachment">Adjuntar imagen</string>
     <string name="chat_room_call_user">Enviar</string>
+    <string name="orders_item_list_name">Enchiladas verdes</string>
+    <string name="orders_item_list_budget">$250</string>
+    <string name="orders_item_list_user">John Doe</string>
+    <string name="orders_list">Ordenes en curso</string>
+    <string name="profile_logout_button">Cerrar sesión</string>
+    <string name="profile_user_name">John Doe</string>
+    <string name="profile_title">Perfil</string>
 
 </resources>

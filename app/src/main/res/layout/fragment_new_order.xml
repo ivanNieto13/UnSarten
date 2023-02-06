@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:text="@string/action_create_order"
         android:textColor="@color/icon"
@@ -140,12 +142,10 @@
 
     <Button
         android:id="@+id/btnAddPictures"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/tertiary"
         app:cornerRadius="10dp"
         app:icon="@drawable/ic_baseline_insert_photo"
         app:iconGravity="textStart"
@@ -153,6 +153,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvAddPicturesTitle" />
+
+    <ImageView
+        android:id="@+id/ivOrderImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_baseline_insert_photo"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAddPictures"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_weight="1"
+        tools:srcCompat="@drawable/ic_baseline_insert_photo" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCreateOrder"
@@ -168,6 +185,6 @@
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddPictures" />
+        app:layout_constraintTop_toBottomOf="@id/ivOrderImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

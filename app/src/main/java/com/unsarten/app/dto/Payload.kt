@@ -14,3 +14,13 @@ data class SaveUserDataInput(
     val email: String,
     val phoneNumber: String
 )
+
+data class SaveOrderDataInput(
+    val orderName: String,
+    val budget: Float,
+    val persons: Long,
+    val optionalIngredients: String,
+    val orderPicture: String,
+    val userId: String,
+    val author: String,
+)

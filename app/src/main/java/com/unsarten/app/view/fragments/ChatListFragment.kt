@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.unsarten.app.R
 import com.unsarten.app.databinding.FragmentChatListBinding
 import com.unsarten.app.model.MessageList
+import com.unsarten.app.model.OrderList
 import com.unsarten.app.model.adapter.MessageListAdapter
+import com.unsarten.app.model.adapter.OrderListAdapter
 
 class ChatListFragment() : Fragment() {
     private var _binding: FragmentChatListBinding? = null

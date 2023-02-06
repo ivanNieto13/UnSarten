@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.unsarten.app.R
 import com.unsarten.app.databinding.ActivityHomeBinding
-import com.unsarten.app.view.fragments.BlankFragment
-import com.unsarten.app.view.fragments.ChatListFragment
-import com.unsarten.app.view.fragments.NewOrderFragment
-import com.unsarten.app.view.fragments.ProfileFragment
+import com.unsarten.app.view.fragments.*
 
 class HomeActivity : AppCompatActivity() {
     private var _binding: ActivityHomeBinding? = null
@@ -22,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loadFragment(BlankFragment())
+        loadFragment(OrderListFragment())
         bottomNav = findViewById(binding.bottomNav.id)
         bottomNav.menu.findItem(itemByDefault).isChecked = true
         bottomNav.setOnItemSelectedListener {
@@ -32,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.order_list -> {
-                    loadFragment(BlankFragment())
+                    loadFragment(OrderListFragment())
                     true
                 }
                 R.id.new_order -> {

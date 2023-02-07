@@ -99,7 +99,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
+            android:inputType="text"
             android:maxLength="200"
             android:textColor="@color/icon"
             android:textSize="20sp" />

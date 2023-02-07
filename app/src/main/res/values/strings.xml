@@ -56,11 +56,17 @@
     <string name="chat_room_call_user">Enviar</string>
     <string name="orders_item_list_name">Enchiladas verdes</string>
     <string name="orders_item_list_budget">$250</string>
+    <string name="orders_detail_date">2023–26–2 16:20:00</string>
+    <string name="orders_detail_budget">Presupuesto: $%1$s</string>
+    <string name="orders_detail_persons">Personas: %1$s</string>
+    <string name="orders_detail_ingredients">Posibles ingredientes: %1$s</string>
+    <string name="orders_detail_author">Solicitado por: %1$s</string>
     <string name="orders_item_list_persons">%1$s personas</string>
     <string name="orders_list">Ver ordenes</string>
     <string name="profile_logout_button">Cerrar sesión</string>
     <string name="profile_user_name">John Doe</string>
     <string name="profile_user_email">john@doe.com</string>
     <string name="profile_title">Perfil</string>
+    <string name="orders_detail_image_desc">Imagen</string>
 
 </resources>

@@ -10,8 +10,6 @@ import com.unsarten.app.databinding.FragmentChatListBinding
 import com.unsarten.app.model.MessageList
 import com.unsarten.app.model.OrderList
 import com.unsarten.app.model.adapter.MessageListAdapter
-import com.unsarten.app.model.adapter.OrderListAdapter
-
 class ChatListFragment() : Fragment() {
     private var _binding: FragmentChatListBinding? = null
     private val binding get() = _binding!!

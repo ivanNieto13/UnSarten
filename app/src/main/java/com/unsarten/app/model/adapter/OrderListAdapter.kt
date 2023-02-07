@@ -1,6 +1,5 @@
 package com.unsarten.app.model.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +10,10 @@ import com.unsarten.app.R
 import com.unsarten.app.model.Order
 
 class OrderListAdapter(
-    private val context: Context,
-    private val data: ArrayList<Order>
+    private val onClickListener: OnClickListener,
+    private val data: ArrayList<Order>,
 ) :
     RecyclerView.Adapter<OrderListAdapter.ViewHolder>() {
-    private val mOnClickListener: View.OnClickListener = View.OnClickListener { v ->
-
-    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var orderName: TextView
@@ -46,11 +42,15 @@ class OrderListAdapter(
         holder.orderBudget.text = "$ ${info.budget}"
         holder.orderPersons.text = "${info.persons} personas"
         holder.parentLayout.setOnClickListener {
-            mOnClickListener.onClick(it)
+            onClickListener.onClick(info)
         }
     }
 
     override fun getItemCount(): Int {
         return data.size
+    }
+
+    class OnClickListener(val clickListener: (order: Order) -> Unit) {
+        fun onClick(order: Order) = clickListener(order)
     }
 }

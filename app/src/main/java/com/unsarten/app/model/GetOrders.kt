@@ -16,5 +16,7 @@ data class GetOrder (
     val persons: Long,
     val orderPicture: String? = null,
     val optionalIngredients: String? = null,
+    val author: String,
+    val date: String,
     val orderStatus: String
 )

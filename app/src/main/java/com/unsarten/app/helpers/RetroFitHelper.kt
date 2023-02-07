@@ -4,9 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitHelper {
-    private const val baseUrl = "http://mac-mini-de-ivan.local:3000/api/"
-
-    fun getInstance(): Retrofit {
+    fun getInstance(baseUrl: String): Retrofit {
         return Retrofit.Builder().baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             // we need to add converter factory to

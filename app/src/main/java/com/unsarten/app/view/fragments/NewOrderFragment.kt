@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.unsarten.app.Constants
 import com.unsarten.app.R
 import com.unsarten.app.databinding.FragmentNewOrderBinding
 import com.unsarten.app.dto.SaveOrderDataInput
@@ -57,6 +58,7 @@ class NewOrderFragment : Fragment() {
     private var imageUri: Uri? = null
     var encodedUrlImage: String? = null
 
+    private var baseUrl = Constants.URL_SERVICES + "api/"
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -162,7 +164,7 @@ class NewOrderFragment : Fragment() {
             val imageString = encodedUrlImage ?: ""
 
             if (validateOrderName && validateOrderBudget && validateOrderPersons) {
-                val ordersApi = RetrofitHelper.getInstance().create(OrdersAPI::class.java)
+                val ordersApi = RetrofitHelper.getInstance(baseUrl).create(OrdersAPI::class.java)
                 MainScope().launch {
                     val input = SaveOrderDataInput(
                         orderName!!,

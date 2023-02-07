@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.unsarten.app.Constants
 import com.unsarten.app.R
 import com.unsarten.app.databinding.FragmentOrdersBinding
 import com.unsarten.app.helpers.RetrofitHelper
@@ -25,6 +26,7 @@ class OrderListFragment : Fragment() {
     private var orderList = ArrayList<Order>()
     private lateinit var adapter: OrderListAdapter
 
+    private var baseUrl = Constants.URL_SERVICES + "api/"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +35,7 @@ class OrderListFragment : Fragment() {
         val root: View = binding.root
         val recyclerView = binding.rvOrderList
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
-        val ordersApi = RetrofitHelper.getInstance().create(OrdersAPI::class.java)
+        val ordersApi = RetrofitHelper.getInstance(baseUrl).create(OrdersAPI::class.java)
         MainScope().launch {
             val result = ordersApi.getOrders()
             Log.d("result: ", result.body().toString())

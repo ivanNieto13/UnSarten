@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
+import com.unsarten.app.Constants
 import com.unsarten.app.R
 import com.unsarten.app.databinding.FragmentRegisterUserBinding
 import com.unsarten.app.dto.SaveUserDataInput
@@ -31,6 +32,8 @@ class RegisterUserFragment : Fragment() {
     private var phoneNumber: String? = null
     private var verifyNumber: VerifyNumber? = null
 
+    private var baseUrl = Constants.URL_SERVICES + "api/"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +55,7 @@ class RegisterUserFragment : Fragment() {
 
             if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 println("Registrar usuario: $name $lastName $email $phoneNumber")
-                val loginApi = RetrofitHelper.getInstance().create(LoginAPI::class.java)
+                val loginApi = RetrofitHelper.getInstance(baseUrl).create(LoginAPI::class.java)
                 MainScope().launch {
                     val input = SaveUserDataInput(name, lastName, email, phoneNumber!!)
                     val result = loginApi.saveUserData(input)

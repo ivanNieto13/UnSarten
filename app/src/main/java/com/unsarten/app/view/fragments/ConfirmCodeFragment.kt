@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.room.Room
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.unsarten.app.Constants
 import com.unsarten.app.R
 import com.unsarten.app.activties.HomeActivity
 import com.unsarten.app.databinding.FragmentConfirmCodeBinding
@@ -39,6 +40,7 @@ class ConfirmCodeFragment : Fragment() {
 
     private lateinit var registerUserFragment: RegisterUserFragment
 
+    private var baseUrl = Constants.URL_SERVICES + "api/"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,7 +74,7 @@ class ConfirmCodeFragment : Fragment() {
                 if (verifyNumber?.data?.VerifyNumber?.isVerified!!) {
                     beginTransactionToHome()
                 } else {
-                    val loginApi = RetrofitHelper.getInstance().create(LoginAPI::class.java)
+                    val loginApi = RetrofitHelper.getInstance(baseUrl).create(LoginAPI::class.java)
                     MainScope().launch {
                         val input = VerifyCodeInput(codeNumber!!)
                         val result = loginApi.verifyCode(input)

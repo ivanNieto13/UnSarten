@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.room.Room
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.unsarten.app.Constants
 import com.unsarten.app.R
 import com.unsarten.app.databinding.FragmentLoginBinding
 import com.unsarten.app.dto.VerifyNumberInput
@@ -31,6 +32,8 @@ class LoginFragment : Fragment() {
 
     private lateinit var room: DBUserData
     private var phoneNumber: String? = null
+
+    private var baseUrl = Constants.URL_SERVICES + "api/"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,7 +85,7 @@ class LoginFragment : Fragment() {
                         .setTitle(R.string.login_dialog_title)
                         .setMessage("${getString(R.string.login_dialog_body)} $phoneNumber?")
                         .setPositiveButton(R.string.login_dialog_positive) { dialog, which ->
-                            val loginApi = RetrofitHelper.getInstance().create(LoginAPI::class.java)
+                            val loginApi = RetrofitHelper.getInstance(baseUrl).create(LoginAPI::class.java)
                             MainScope().launch {
                                 val input = VerifyNumberInput("+52" + phoneNumber!!)
                                 val result = loginApi.verifyNumber(input)

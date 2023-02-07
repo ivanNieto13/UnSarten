@@ -1,5 +1,6 @@
 package com.unsarten.app.view.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -41,6 +42,11 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        if (Constants.URL_SERVICES == Constants.URL_DEFAULT) {
+            showAlertDialog()
+            return root
+        }
 
         activity?.let {
             room = Room.databaseBuilder(it, DBUserData::class.java, "db_user_data").build()
@@ -107,6 +113,18 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun showAlertDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(R.string.invalid_service_title)
+        builder.setMessage(R.string.invalid_service_body)
+        builder.setPositiveButton(R.string.login_dialog_positive_accept) { dialog, _ ->
+            if (Constants.URL_SERVICES == Constants.URL_DEFAULT) {
+                showAlertDialog()
+            }
+        }
+        builder.show()
     }
 
     private fun beginTransaction(verifyNumber: VerifyNumber) {

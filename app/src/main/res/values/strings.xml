@@ -35,6 +35,8 @@
     <string name="title_register_user">Ingresa tus datos</string>
     <string name="title_activity_home">Home</string>
     <string name="invalid_email">Correo inválido</string>
+    <string name="invalid_service_title">Cambia la URL de servicios</string>
+    <string name="invalid_service_body">Cambia la URL de servicios por la que se provee en la entrega, como lo dice en el README</string>
     <string name="login_dialog_body_error">Ingresa un número a 10 dígitos</string>
     <string name="login_dialog_title_error">Número no válido</string>
     <string name="login_dialog_code_title_error">Código inválido</string>
@@ -68,5 +70,7 @@
     <string name="profile_user_email">john@doe.com</string>
     <string name="profile_title">Perfil</string>
     <string name="orders_detail_image_desc">Imagen</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,30 +1,39 @@
 package com.unsarten.app.view.fragments
 
+import android.app.Activity.RESULT_OK
+import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import android.app.Activity.RESULT_OK
-import android.graphics.Bitmap
-import android.net.Uri
-import android.provider.MediaStore
-import android.util.Log
+import android.webkit.MimeTypeMap
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unsarten.app.R
 import com.unsarten.app.databinding.FragmentNewOrderBinding
 import com.unsarten.app.dto.SaveOrderDataInput
 import com.unsarten.app.helpers.RetrofitHelper
 import com.unsarten.app.model.SaveOrderData
+import com.unsarten.app.room.dao.DBUserData
+import com.unsarten.app.room.dao.UserData
 import com.unsarten.app.service.lib.OrdersAPI
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.util.*
+
 
 class NewOrderFragment : Fragment() {
     private var _binding: FragmentNewOrderBinding? = null
@@ -34,6 +43,11 @@ class NewOrderFragment : Fragment() {
     private var orderBudget: Float = 0.0f
     private var orderPersons: Long = 0
     private var orderOptionalIngredients: String? = null
+
+    private var user: UserData? = null
+    private var userId = ""
+    private var author = ""
+    private lateinit var room: DBUserData
 
     private var validateOrderName = false
     private var validateOrderBudget = false
@@ -50,6 +64,20 @@ class NewOrderFragment : Fragment() {
     ): View {
         _binding = FragmentNewOrderBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        activity?.let {
+            room = Room.databaseBuilder(it, DBUserData::class.java, "db_user_data").build()
+        }
+
+        lifecycleScope.launch {
+            val users = room.daoUser().getUserData()
+            if (users.isNotEmpty()) {
+                user = users[0]
+                userId = user?.userId.toString()
+                author = user?.firstName + " " + user?.lastName
+            }
+        }
+
         validateInput()
 
         return root
@@ -66,7 +94,10 @@ class NewOrderFragment : Fragment() {
             var bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, imageUri)
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
             var byteArray = os.toByteArray()
-            encodedUrlImage = Base64.getUrlEncoder().encodeToString(byteArray)
+            val imageAsString = Base64.getEncoder().encodeToString(byteArray)
+            activity?.let {
+                encodedUrlImage = "data:image/"+ imageUri?.let { it1 -> getMimeType(it, it1) } +";base64,"+imageAsString
+            }
         }
     }
 
@@ -128,7 +159,7 @@ class NewOrderFragment : Fragment() {
                 orderPersons = orderPersonsString.toLong()
             }
 
-            encodedUrlImage
+            val imageString = encodedUrlImage ?: ""
 
             if (validateOrderName && validateOrderBudget && validateOrderPersons) {
                 val ordersApi = RetrofitHelper.getInstance().create(OrdersAPI::class.java)
@@ -138,9 +169,9 @@ class NewOrderFragment : Fragment() {
                         orderBudget,
                         orderPersons,
                         orderOptionalIngredientsString,
-                        "2021-06-01",
-                        "f2555458-9822-4de7-973d-e0f587378da8 ",
-                        "John Doe",
+                        imageString,
+                        userId,
+                        author,
                     )
                     val result = ordersApi.saveOrderData(input)
                     Log.d("result: ", result.body().toString())
@@ -162,6 +193,16 @@ class NewOrderFragment : Fragment() {
             transaction?.replace(this.id, fragment)
             transaction?.commit()
         }
+    }
+
+    private fun getMimeType(context: Context, uri: Uri): String? {
+        val extension: String? = if (uri.scheme == ContentResolver.SCHEME_CONTENT) {
+            val mime = MimeTypeMap.getSingleton()
+            mime.getExtensionFromMimeType(context.contentResolver.getType(uri))
+        } else {
+            MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(uri.path?.let { File(it) }).toString())
+        }
+        return extension
     }
 
 }

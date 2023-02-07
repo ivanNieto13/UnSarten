@@ -23,25 +23,29 @@ class HomeActivity : AppCompatActivity() {
 
         val myIntent = intent
         val user = myIntent.getSerializableExtra("user") as UserData
-
+        binding.tvViewTitle.text = getString(R.string.orders_list)
         loadFragment(OrderListFragment())
         bottomNav = findViewById(binding.bottomNav.id)
         bottomNav.menu.findItem(itemByDefault).isChecked = true
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.chat_list -> {
+                    binding.tvViewTitle.text = getString(R.string.chats_title)
                     loadFragment(ChatListFragment())
                     true
                 }
                 R.id.order_list -> {
+                    binding.tvViewTitle.text = getString(R.string.orders_list)
                     loadFragment(OrderListFragment())
                     true
                 }
                 R.id.new_order -> {
+                    binding.tvViewTitle.text = getString(R.string.action_create_order)
                     loadFragment(NewOrderFragment())
                     true
                 }
                 R.id.profile_user -> {
+                    binding.tvViewTitle.text = getString(R.string.profile_title)
                     loadFragment(ProfileFragment(user))
                     true
                 }

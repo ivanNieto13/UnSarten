@@ -29,11 +29,11 @@ class HomeActivity : AppCompatActivity() {
         bottomNav.menu.findItem(itemByDefault).isChecked = true
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.chat_list -> {
+                /*R.id.chat_list -> {
                     binding.tvViewTitle.text = getString(R.string.chats_title)
                     loadFragment(ChatListFragment())
                     true
-                }
+                }*/
                 R.id.order_list -> {
                     binding.tvViewTitle.text = getString(R.string.orders_list)
                     loadFragment(OrderListFragment())

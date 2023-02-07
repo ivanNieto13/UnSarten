@@ -18,6 +18,7 @@ import com.unsarten.app.Constants
 import com.unsarten.app.R
 import com.unsarten.app.databinding.FragmentLoginBinding
 import com.unsarten.app.dto.VerifyNumberInput
+import com.unsarten.app.helpers.Network
 import com.unsarten.app.helpers.RetrofitHelper
 import com.unsarten.app.model.VerifyNumber
 import com.unsarten.app.room.dao.DBUserData
@@ -46,6 +47,10 @@ class LoginFragment : Fragment() {
         if (Constants.URL_SERVICES == Constants.URL_DEFAULT) {
             showAlertDialog()
             return root
+        }
+
+        if (!Network.checkConnectivity(this.requireContext())) {
+            showNoInternetAlertDialog()
         }
 
         activity?.let {
@@ -122,6 +127,18 @@ class LoginFragment : Fragment() {
         builder.setPositiveButton(R.string.login_dialog_positive_accept) { dialog, _ ->
             if (Constants.URL_SERVICES == Constants.URL_DEFAULT) {
                 showAlertDialog()
+            }
+        }
+        builder.show()
+    }
+
+    private fun showNoInternetAlertDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(R.string.no_internet_title)
+        builder.setMessage(R.string.no_internet_body)
+        builder.setPositiveButton(R.string.login_dialog_positive_accept) { dialog, _ ->
+            if (!Network.checkConnectivity(this.requireContext())) {
+                showNoInternetAlertDialog()
             }
         }
         builder.show()

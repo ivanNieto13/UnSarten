@@ -72,5 +72,7 @@
     <string name="orders_detail_image_desc">Imagen</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_internet_title">No hay internet</string>
+    <string name="no_internet_body">Para el uso correcto de la aplicación, se necesita tener una conexión activa a internet.</string>
 
 </resources>

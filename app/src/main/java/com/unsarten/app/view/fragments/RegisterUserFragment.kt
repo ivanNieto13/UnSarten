@@ -1,5 +1,6 @@
 package com.unsarten.app.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.unsarten.app.Constants
 import com.unsarten.app.R
+import com.unsarten.app.activties.HomeActivity
 import com.unsarten.app.databinding.FragmentRegisterUserBinding
 import com.unsarten.app.dto.SaveUserDataInput
 import com.unsarten.app.dto.VerifyCodeInput
@@ -22,6 +24,7 @@ import com.unsarten.app.room.dao.UserData
 import com.unsarten.app.service.lib.LoginAPI
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import java.io.Serializable
 
 class RegisterUserFragment : Fragment() {
     private var _binding: FragmentRegisterUserBinding? = null
@@ -64,6 +67,7 @@ class RegisterUserFragment : Fragment() {
                         val saveUserData = result.body() as SaveUserData
                         if (saveUserData.data.SaveUserData.userId != "") {
                             saveUserData(saveUserData)
+                            beginTransactionToHome()
                         } else {
                             // error
                         }
@@ -89,6 +93,19 @@ class RegisterUserFragment : Fragment() {
         )
         lifecycleScope.launch {
             room.daoUser().addUser(userData)
+        }
+    }
+
+    private fun beginTransactionToHome() {
+        lifecycleScope.launch {
+            val intent = Intent(activity, HomeActivity::class.java)
+            val users = room.daoUser().getUserData()
+            if (users.isNotEmpty()) {
+                val user = users[0] as Serializable
+                intent.putExtra("user", user)
+            }
+            activity?.startActivity(intent)
+            activity?.finish()
         }
     }
 
